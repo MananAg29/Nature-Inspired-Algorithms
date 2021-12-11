@@ -1,0 +1,60 @@
+* {
+  margin: 0px;
+  padding: 0%;
+}
+
+.btn-group button {
+  background-color: #dfe2e2;
+  border: 1px solid black;
+  color: white;
+  padding: 10px 24px;
+  cursor: pointer;
+  float: left;
+  text-align: center;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  width: 140px;
+  border: 3px solid black;
+  border-radius: 4px;
+}
+.algos {
+  margin-top: 60px;
+  margin-left: 140px;
+  margin-right: 140px;
+  font: 100%/1.5 Helvetica Neue, Helvetica, Arial, sans-serif;
+}
+
+.btn-group:after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.btn-group button:hover {
+  background-color: #D0D0D0;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+h1 {
+  padding: 13px;
+  text-align: center;
+  text-decoration: underline;
+}
+#cont1{
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+img{
+  width: 150px;
+  height: 150px;
+}
+html {
+  font: 100%/1.5 Helvetica Neue, Helvetica, Arial, sans-serif;
+}
