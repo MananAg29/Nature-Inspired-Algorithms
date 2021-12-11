@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Particle Swarm Optimization</title>
+
+    <!-- Configure and import MathJax -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript"
+      src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+      </script>
+      <!-- End MathJax -->
+
+      <!-- CSS -->
+      <link rel="stylesheet" type="text/css" href="css/toast.css">
+      <link rel="stylesheet" type="text/css" href="css/topcoat-mobile-light.min.css">
+      <link rel="stylesheet" type="text/css" href="css/pso.css">
+
+      <!-- Load scripts with require -->
+      <script data-main="js/run.js" src="js/lib/require.js"></script>
+    </head>
+
+    <body>
+      <div class="container">
+        <div class="grid">
+          <!-- Header -->
+          <div class="unit span-grid" id="header">
+            <h1>Particle Swarm Optimization Visualization</h1>
+          </div>
+
+          <!-- Left options -->
+          <div class="unit one-of-four" id="leftCol">
+            <div id="function">
+              <h2>Optimization Function </h2>
+              <!--[<a href="#functionModal">?</a>]-->
+              <ul id="functionRadios">
+                <li>
+                <label class="topcoat-radio-button">
+                  <input type="radio" name="functionSelect" value="sqr">
+                  <div class="topcoat-radio-button__checkmark"></div>
+                  De Jong's function
+                </label>
+                </li>
+
+                <li>
+                <label class="topcoat-radio-button">
+                  <input type="radio" name="functionSelect" value="rose">
+                  <div class="topcoat-radio-button__checkmark"></div>
+                  Rosenbrock's valley
+                </label>
+                </li>
+
+                <li>
+                <label class="topcoat-radio-button">
+                  <input type="radio" name="functionSelect" value="rast">
+                  <div class="topcoat-radio-button__checkmark"></div>
+                  Rastrigrin's function
+                </label>
+                </li>
+              </ul>
+            </div>
+
+            <div id="parameters">
+              <h2>Parameters </h2>
+              <!--[<a href="#parametersModal">?</a>]-->
+              <div id="paramsInput">
+                <ul class="inputList">
+                  <li>
+                  <div class="grid">
+                    <div class="unit one-of-five">
+                      <label for="chi">$\chi$</label>
+                    </div>
+                    <div class="unit three-of-four">
+                      <input type="text" class="topcoat-text-input" name="chi">
+                    </div>
+                  </div>
+                  </li>
+
+                  <li>
+                  <div class="grid">
+                    <div class="unit one-of-five">
+                      <label for="c1">$c_1$</label>
+                    </div>
+                    <div class="unit three-of-four">
+                      <input type="text" class="topcoat-text-input" name="c1">
+                    </div>
+                  </div>
+                  </li>
+
+                  <li>
+                  <div class="grid">
+                    <div class="unit one-of-five">
+                      <label for="c2">$c_2$</label>
+                    </div>
+                    <div class="unit three-of-four">
+                      <input type="text" class="topcoat-text-input" name="c2">
+                    </div>
+                  </div>
+                  </li>
+
+                  <li>
+                  <div class="grid">
+                    <div class="unit one-of-five">
+                      <label for="n">$n$</label>
+                    </div>
+                    <div class="unit three-of-four">
+                      <input type="text" class="topcoat-text-input" name="n">
+                    </div>
+                  </div>
+                  </li>
+                </ul>
+              </div>
+              <!--
+              <div id="optionsInput">
+                <ul>
+                  <li>
+                  <label class="topcoat-checkbox" style="display: block">
+                    <input type="checkbox" value="ballmethod">
+                    <div class="topcoat-checkbox__checkmark"></div>
+                    Use "ball method"
+                  </label>
+                  </li>
+                </ul>
+              </div>-->
+            </div>
+
+          </div>
+
+          <!-- canvas -->
+          <div class="unit one-of-two" id="centerCol">
+            <div id="clickStart">
+              <h2>Click 'Start' to begin</h2>
+            </div>
+            <canvas id="viewport"></canvas>
+            <div id="buttons" class="topcoat-button-bar">
+              <div class="topcoat-button-bar__item">
+                <button class="topcoat-button-bar__button--large" name="stop">Stop</button>
+              </div>
+              <div class="topcoat-button-bar__item">
+                <button class="topcoat-button-bar__button--large" name="reset">Reset</button>
+              </div>
+              <div class="topcoat-button-bar__item">
+                <button class="topcoat-button-bar__button--large" name="start">Start</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right options -->
+          <div class="unit one-of-four" id="rightCol">
+            <div id="options">
+              <h2>Live Options </h2>
+              <!--[<a href="#optionsModal">?</a>]-->
+              <ul id="liveOptionsInput">
+                <li>
+                <label class="topcoat-checkbox" style="display: block">
+                  <input type="checkbox" value="drawbg">
+                  <div class="topcoat-checkbox__checkmark"></div>
+                  Draw function in background
+                </label>
+                </li>
+
+                <li>
+                <label class="topcoat-checkbox" style="display: block">
+                  <input type="checkbox" value="drawmin"> 
+                  <div class="topcoat-checkbox__checkmark"></div>
+                  Draw known minimum (red)
+                </label>
+                </li>
+
+                <li>
+                <label class="topcoat-checkbox" style="display: block">
+                  <input type="checkbox" value="drawgmin"> 
+                  <div class="topcoat-checkbox__checkmark"></div>
+                  Draw global minimum (green)
+                </label>
+                </li>
+
+                <li>
+                <label class="topcoat-checkbox" style="display: block">
+                  <input type="checkbox" value="drawlmin"> 
+                  <div class="topcoat-checkbox__checkmark"></div>
+                  Draw local minima (yellow)
+                </label>
+                </li>
+
+                <li>
+                <label class="topcoat-checkbox" style="display: block">
+                  <input type="checkbox" value="drawparts"> 
+                  <div class="topcoat-checkbox__checkmark"></div>
+                  Draw particles (black)
+                </label>
+                </li>
+              </div>
+            </div>
+
+            
+          </div>
+        </div>
+      </div>
+
+    </body>
+  </html>
